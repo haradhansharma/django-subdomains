@@ -5,8 +5,10 @@ except ImportError:
     from urllib.parse import urlunparse
 
 from django.conf import settings
-from django.core.urlresolvers import reverse as simple_reverse
-
+try:
+    from django.core.urlresolvers import reverse as simple_reverse
+except ImportError:
+    from django.urls import resolve as simple_reverse # DJANGO 3.1+
 
 def current_site_domain():
     from django.contrib.sites.models import Site
